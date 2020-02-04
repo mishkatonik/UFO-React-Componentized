@@ -1,0 +1,15 @@
+.StateCheckboxContainer {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-gap: 5px;
+    align-items: center;
+    margin: 10px;
+    text-transform: uppercase;
+    color: white;
+    font-family: var(--font-text);
+}
+
+.checkboxItem {
+
+}

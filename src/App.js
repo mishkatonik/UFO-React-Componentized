@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import NavBar from './components/NavBar/NavBar.js';
+import GraphContainer from './components/GraphContainer/GraphContainer.js';
+import Bar from './components/GraphContainer/Bar.js';
+import StateCheckboxContainer from './components/StateCheckboxContainer/StateCheckboxContainer.js';
+import CheckboxItem from './components/StateCheckboxContainer/CheckboxItem.js';
 
 
 class App extends Component {
@@ -94,42 +99,40 @@ class App extends Component {
     
     return (
       <div>
-        <div className="NavBar">
-          <h1>UFO Sightings by State</h1>
-          <a href="#" className="NavBtn">Home</a>
-          <a href="#" className="NavBtn">About</a>
-        </div>
 
-        <div className="StateCheckboxContainer">
+        <NavBar />
+
+        <StateCheckboxContainer>
+
           {
-              this.state.availableStates.map((stateInfo, index) => (
-                  <label>
-                    <input 
-                      type="checkbox" 
-                      className="checkboxItem"
-                      value={stateInfo.state}
-                      onClick={() => {
-                        this.state.selectedStates.indexOf(stateInfo) > -1 
-                          ? this.removeStateSelect(index)
-                          : this.onStateSelect(index)
-                        }
-                      } />
-                    {stateInfo.state}
-                  </label>
-              ))
+            this.state.availableStates.map((stateInfo, index) => (
+                <CheckboxItem
+                  selectedState={stateInfo.state}
+                  onClick={() => {
+                    this.state.selectedStates.indexOf(stateInfo) > -1 
+                      ? this.removeStateSelect(index)
+                      : this.onStateSelect(index)
+                      }
+                    } 
+                >
+                  {stateInfo.state}
+                </CheckboxItem>
+            ))
           }
-        </div>
 
-        <div className="graphContainer">
+        </StateCheckboxContainer>
+
+        <GraphContainer>
           
           {
             this.state.selectedStates.map(stateInfo => (
-              <div className="Bar" style={{height: (stateInfo.sightings/10) + "px"}}>
+              <Bar style={{height: (stateInfo.sightings/22) + "px"}}>
                 {stateInfo.state} - {stateInfo.sightings}
-              </div>
+              </Bar>
             ))
           }
-        </div>
+
+        </GraphContainer>
       </div>
     );
   }
