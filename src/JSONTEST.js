@@ -12,21 +12,8 @@ import CheckboxItem from './components/StateCheckboxContainer/CheckboxItem.js';
 
 class App extends Component {
   state = {
-    availableStates: 
-      [
-        {
-          "state": "ak",
-          "sightings": 319
-        },
-        {
-          "state": "al",
-          "sightings": 642
-        },
-        {
-          "state": "ar",
-          "sightings": 588
-        }
-      ],
+    allSightings: [],
+    availableStates: [],
     selectedStates: [],
   }
 
@@ -36,10 +23,14 @@ class App extends Component {
     .then(jsonData => {
       console.log(jsonData);
       this.setState({
-        availableStates: jsonData
+        allSightings: jsonData
       })
     });
   }
+
+  this.state.allSightings.filter(sighting => {
+    return sighting.state === 'ca'
+  })
 
 
   onStateSelect = (index) => {
@@ -66,7 +57,7 @@ class App extends Component {
       this.setState({
         availableStates: availableStates,
         selectedStates: selectedStates,
-      });
+      }); 
     } 
   }
 
